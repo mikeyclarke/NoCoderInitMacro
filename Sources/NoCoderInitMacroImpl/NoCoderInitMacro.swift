@@ -3,10 +3,11 @@ import SwiftSyntax
 import SwiftSyntaxMacros
 
 public struct NoCoderInitMacro: MemberMacro {
-    public static func expansion<Declaration: DeclGroupSyntax, Context: MacroExpansionContext>(
+    public static func expansion(
         of node: AttributeSyntax,
-        providingMembersOf declaration: Declaration,
-        in context: Context
+        providingMembersOf declaration: some DeclGroupSyntax,
+        conformingTo protocols: [TypeSyntax],
+        in context: some MacroExpansionContext
     ) throws -> [DeclSyntax] {
         let accessModifier = try Self.getAccessModifier(from: declaration)
 
